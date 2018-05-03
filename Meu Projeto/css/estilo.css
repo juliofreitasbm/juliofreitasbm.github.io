@@ -1,0 +1,208 @@
+/*Limpar fortamações padrão*/
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	font-size: 16px;
+	font-family: "Trebucht MS", Helvetica, sans-serif;
+	background: #E0F8F1; /*F3F3F3*/
+}
+
+#navegacao{
+	background: #fff;
+	border-bottom: 3px solid #828081;
+	height: 45px;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	z-index: 1;
+}
+
+#area{
+	width: 720px;
+	margin: 0 auto;
+}
+
+#area-principal{
+	width: 720px;
+	margin: 63px auto 10px auto;
+	/*border: 1px solid red;*/
+	z-index: 2;
+}
+
+
+#logo{
+	float: left;
+	padding-top: 4px;
+}
+
+#menu{
+	float: right;
+	/*border: 1px solid red;*/
+	padding: 10px 0px;
+	margin-top: 3px; 
+}
+
+#postagem{
+	border-radius: 10% 30%;
+	background: #fff;
+	padding: 10px;
+	margin-bottom: 15px;
+	height: 250px;
+}
+
+#postagem2{
+	border-radius: 5% 5%;
+	background: #fff;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+#area-contato{
+	border-radius: 10% 30%;
+	background: #fff;
+	padding: 10px;
+	margin-bottom: 15px;
+	height: 500px;
+}
+
+#area-sobrenos{
+	border-radius: 10% 30%;
+	background: #fff;
+	padding: 10px;
+	margin-bottom: 15px;
+	height: 400px;
+}
+
+#msg{
+	width: 700px; 
+	height: 150px; 
+	resize: none;
+}
+
+#botaoenviar{
+	float: right;
+}
+
+/*h2{
+	color: #3CC47C;
+}
+*/
+/****************FORMATAÇÃO DO MENU****************/
+a.linkum{
+	border-radius: 30%;
+	text-decoration: none;
+	padding: 5px 7px;
+	font-size: 18px;
+}
+/*Links não visitados*/
+a.linkum:link{
+	color: #828081;
+}
+/*Links visitados*/
+a.linkum:visited{
+	color: #828081;
+}
+/*Links hover*/
+a.linkum:hover{
+	color: #fff;
+	background: #1E392A; /*#E9C893;*/
+}
+/*Links active*/
+a.linkum:active{
+	color: #3CC47C;
+}
+
+/*****************LINK DOS TÍTULOS********************/
+a.linkdois{
+	display: block;
+	position: absolute;
+	text-decoration: none;
+}
+/*Links não visitados*/
+a.linkdois:link{
+	color: #3CC47C;
+}
+/*Links visitados*/
+a.linkdois:visited{
+	color: #3CC47C;
+}
+/*Links hover*/
+a.linkdois:hover{
+	color: #E9C893;
+}
+/*Links active*/
+a.linkdois:active{
+	font-size: 17px;
+}
+
+/*CLASSES*/
+.verde{
+	color: #3CC47C;
+}
+
+.data-postagem{
+	font-size: 14px;
+	border-bottom: 1px solid #828081;
+	display: block;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.img-postagem{
+	border-radius: 10%;
+	float: left;
+	margin: 0 10px 5px 0
+}
+
+.postado{
+	display: block;
+	float: right;
+	border-bottom: 5px solid #d8d8d8; 
+	margin-bottom: 10px;
+}
+
+.agradecimento{
+	display: block;
+	float: right;
+	margin-bottom: 10px;
+}
+
+.postado2{
+	display: block;
+	float: bottom;
+	border-bottom: 5px solid #d8d8d8; 
+	margin-bottom: 10px;
+}
+
+.titulonoticia{
+	color: #3CC47C;
+	font-size: 34px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.tituloverde{
+	color: #3CC47C;
+	font-size: 45px;
+	text-align: center;
+}
+
+
+.viaemail{
+	font-size: 22px;
+	border-bottom: 1px solid #828081;
+	display: block;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.viamensagem{
+	font-size: 22px;
+	display: block;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
