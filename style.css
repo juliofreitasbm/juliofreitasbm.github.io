@@ -81,6 +81,10 @@ body {
 	gap: 20px;
 }
 
+#main div#data {
+	margin-bottom: 40px;
+}
+
 #main div#data .linha .geracao {
 	width: 100px;
 }
