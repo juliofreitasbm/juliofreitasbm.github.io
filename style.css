@@ -1,0 +1,92 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	background-color: cornflowerblue;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+}
+
+#main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	padding: 30px 0;
+}
+
+#main h1 {
+	margin-bottom: 40px;
+}
+
+#main div#inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 40px;
+}
+
+#main div#inputs .label-input {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+#main div#inputs p {
+	font-size: 18px;
+	width: 200px;
+}
+
+#main div#inputs input{
+	width: 80px;
+	height: 40px;
+	border-radius: 6px;
+	border: gray 1px solid;
+	text-align: center;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#main div#buttons{
+	display: flex;
+	gap: 10px;
+	margin-bottom: 40px;
+}
+
+#main div#buttons button{
+	font-size: 16px;	
+	padding: 10px 20px;
+	width: 140px;
+	border-radius: 6px;
+	text-align: center;
+}
+
+#main div#buttons button#aplicar {
+
+	color: white;
+	background-color: blue;
+}
+
+#main div#data .linha {
+	display: flex;
+	gap: 20px;
+}
+
+#main div#data .linha .geracao {
+	width: 100px;
+}
+#main div#data .linha .media {
+	width: 220px;
+}
+#main div#data .linha .mais-apto {
+	width: 220px;
+}

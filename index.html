@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<title>Algoritmo Genético</title>
+	</head>
+	<body>
+		<div id="main">
+			<h1>Algoritmo Genético</h1>
+			<div id="inputs">
+				<div class="label-input">
+					<p>Tamanho do Cromossomo:</p>
+					<input type="number" value="44" id="tamanho-cromossomo">
+				</div>
+				<div class="label-input">
+					<p>Tamanho da População:</p>
+					<input type="number" value="100" id="tamanho-populacao">
+				</div>
+				<div class="label-input">
+					<p>Número de Gerações:</p>
+					<input type="number" value="40" id="numero-geracoes">
+				</div>
+				<div class="label-input">
+					<p>Taxa de Crossover:</p>
+					<input type="number" step="0.01" value="0.65" id="taxa-crossover">
+				</div>
+				<div class="label-input">
+					<p>Taxa de Mutação:</p>
+					<input type="number" step="0.001" value="0.008" id="taxa-mutacao">
+				</div>
+
+			</div>
+
+			<div id="buttons">
+				<button id="reiniciar" onclick="reiniciarInputs()">REINICIAR</button>
+				<button id="aplicar" onclick="algoritmoGenetico()">APLICAR</button>
+			</div>		
+			<div id="data">
+
+			</div>
+		</div>
+	</body>
+	<script src="script.js"></script>
+</html>
