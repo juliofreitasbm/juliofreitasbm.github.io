@@ -120,8 +120,8 @@ function Circle(x, y, dx, dy, radius) {
 	this.minRadius = radius;
 	this.initialAbsDx = Math.abs(dx);
 	this.initialAbsDy = Math.abs(dy);
-	this.explosionVelocity = 18;
-	this.returnVelocity = 0.5;
+	this.explosionAcceleration = 18;
+	this.returnAcceleration = 0.5;
 	this.color = colorArray[Math.floor(Math.random() * (colorArray.length))];
 
 	this.draw = function() {
@@ -160,29 +160,35 @@ function Circle(x, y, dx, dy, radius) {
 
 	this.explode = function() {
 		if(mouse.x - this.x < 0) {
-			this.dx = this.explosionVelocity * Math.abs(dx);
+			this.dx = this.explosionAcceleration * Math.abs(dx);
 		}
 		if(mouse.x - this.x > 0) {
-			this.dx = -this.explosionVelocity * Math.abs(dx);
+			this.dx = -this.explosionAcceleration * Math.abs(dx);
 		}
 		if(mouse.y - this.y < 0) {
-			this.dy = this.explosionVelocity * Math.abs(dy);
+			this.dy = this.explosionAcceleration * Math.abs(dy);
 		}
 		if(mouse.y - this.y > 0) {
-			this.dy = -this.explosionVelocity * Math.abs(dy);
+			this.dy = -this.explosionAcceleration * Math.abs(dy);
 		}
 
 		//console.log("blow");
 	}
 
 	this.return = function() {
-		if(Math.abs(this.dx) > Math.abs(this.initialAbsDx)){
-			if(this.dx > 0) this.dx -= this.returnVelocity;
-			if(this.dx < 0) this.dx += this.returnVelocity;
+		if(Math.abs(this.dx) >= (this.initialAbsDx + this.returnAcceleration)){
+			if(this.dx >= 0) this.dx -= this.returnAcceleration;
+			else this.dx += this.returnAcceleration;
+		} else {
+			if(this.dx >= 0) this.dx = this.initialAbsDx;
+			else this.dx = -this.initialAbsDx;
 		}
-		if(Math.abs(this.dy) > Math.abs(this.initialAbsDy)){
-			if(this.dy > 0) this.dy -= this.returnVelocity;
-			if(this.dy < 0) this.dy += this.returnVelocity;
+		if(Math.abs(this.dy) >= (this.initialAbsDy + this.returnAcceleration)){
+			if(this.dy >= 0) this.dy -= this.returnAcceleration;
+			else this.dy += this.returnAcceleration;
+		} else {
+			if(this.dy >= 0) this.dy = this.initialAbsDy;
+			else this.dy = -this.initialAbsDy;
 		}
 	}
 }
