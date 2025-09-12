@@ -76,7 +76,8 @@ canvas.height = window.innerHeight;
 let mouse = {
 	x: undefined,
 	y: undefined,
-	click: false,
+	up: false,
+	down: false,
 	clickCount: 0,
 }
 let maxRadius = 40;
@@ -95,8 +96,8 @@ window.addEventListener('mousemove', function(event) {
 	// console.log(mouse);
 });
 
-window.addEventListener('mousedown', function(event) {
-	mouse.click = true;
+window.addEventListener('mouseup', function(event) {
+	mouse.up = true;
 	let explosionAudio = new Audio('audios/fast_explosion.mp3')
 	mouse.clickCount++;
 	if(mouse.clickCount%20 == 0) {
@@ -105,8 +106,15 @@ window.addEventListener('mousedown', function(event) {
 	}
 	explosionAudio.play();
 
-	console.log(mouse);
+	mouse.down = false;
+	//console.log(mouse);
 });
+
+window.addEventListener('mousedown', function(event){
+	mouse.down = true;
+
+	console.log(mouse);
+})
 
 let circleQuantity = Math.floor(window.innerWidth * window.innerHeight / 800);
 // console.log(circleQuantity);
@@ -158,7 +166,8 @@ function Circle(x, y, dx, dy, radius) {
 			&& mouse.y - this.y < 50 
 			&& mouse.y - this.y > -50
 		) {
-			if(mouse.click == true) this.explode();
+			if(mouse.up == true) this.explode();
+			if(mouse.down == true) this.pull()
 			if(this.radius < maxRadius) this.radius += 1;
 		} else {
 			if(this.radius > this.minRadius) this.radius -= 1;
@@ -172,13 +181,13 @@ function Circle(x, y, dx, dy, radius) {
 		if(mouse.x - this.x < 0) {
 			this.dx = this.explosionAcceleration * Math.abs(dx);
 		}
-		if(mouse.x - this.x > 0) {
+		else {
 			this.dx = -this.explosionAcceleration * Math.abs(dx);
 		}
 		if(mouse.y - this.y < 0) {
 			this.dy = this.explosionAcceleration * Math.abs(dy);
 		}
-		if(mouse.y - this.y > 0) {
+		else {
 			this.dy = -this.explosionAcceleration * Math.abs(dy);
 		}
 
@@ -200,6 +209,16 @@ function Circle(x, y, dx, dy, radius) {
 			if(this.dy >= 0) this.dy = this.initialAbsDy;
 			else this.dy = -this.initialAbsDy;
 		}
+	}
+
+	this.pull = function() {
+		console.log("pull");
+		// if(Math.sqrt(Math.pow(this.x - mouse.x, 2) + Math.pow(this.y - mouse.y, 2)) == 50) {
+		// 	this.dx = -this.dx;
+		// 	this.dy = -this.dy;
+		// }
+		this.x = mouse.x;
+		this.y = mouse.y;
 	}
 }
 
@@ -230,7 +249,7 @@ function animate() {
 	for(let i = 0; i < circleArray.length; i++) {
 		circleArray[i].update()
 	}
-	mouse.click = false
+	mouse.up = false
 }
 
 
