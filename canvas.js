@@ -75,7 +75,8 @@ canvas.height = window.innerHeight;
 // var radius = 30;
 let mouse = {
 	x: undefined,
-	y: undefined
+	y: undefined,
+	click: false
 }
 let maxRadius = 40;
 
@@ -91,6 +92,11 @@ window.addEventListener('mousemove', function(event) {
 	mouse.x = event.x
 	mouse.y = event.y
 	// console.log(mouse);
+});
+
+window.addEventListener('mousedown', function(event) {
+	mouse.click = true;
+	console.log(mouse);
 });
 
 let circleQuantity = Math.floor(window.innerWidth * window.innerHeight / 800);
@@ -112,6 +118,10 @@ function Circle(x, y, dx, dy, radius) {
 	this.dy = dy;
 	this.radius = radius;
 	this.minRadius = radius;
+	this.initialAbsDx = Math.abs(dx);
+	this.initialAbsDy = Math.abs(dy);
+	this.explosionVelocity = 18;
+	this.returnVelocity = 0.5;
 	this.color = colorArray[Math.floor(Math.random() * (colorArray.length))];
 
 	this.draw = function() {
@@ -122,6 +132,7 @@ function Circle(x, y, dx, dy, radius) {
 	}
 
 	this.update = function() {
+		//quicando nas bordas
 		if(this.x + this.radius > innerWidth || this.x - this.radius < 0) {
 			this.dx = -this.dx;
 		}
@@ -136,14 +147,43 @@ function Circle(x, y, dx, dy, radius) {
 			&& mouse.x - this.x > -50
 			&& mouse.y - this.y < 50 
 			&& mouse.y - this.y > -50
-			&& this.radius < maxRadius
 		) {
-			this.radius += 1;
-		} else if(this.radius > this.minRadius) {
-			this.radius -= 1;
+			if(mouse.click == true) this.explode();
+			if(this.radius < maxRadius) this.radius += 1;
+		} else {
+			if(this.radius > this.minRadius) this.radius -= 1;
+			this.return()
 		}
 
 		this.draw();
+	}
+
+	this.explode = function() {
+		if(mouse.x - this.x < 0) {
+			this.dx = this.explosionVelocity * Math.abs(dx);
+		}
+		if(mouse.x - this.x > 0) {
+			this.dx = -this.explosionVelocity * Math.abs(dx);
+		}
+		if(mouse.y - this.y < 0) {
+			this.dy = this.explosionVelocity * Math.abs(dy);
+		}
+		if(mouse.y - this.y > 0) {
+			this.dy = -this.explosionVelocity * Math.abs(dy);
+		}
+
+		//console.log("blow");
+	}
+
+	this.return = function() {
+		if(Math.abs(this.dx) > Math.abs(this.initialAbsDx)){
+			if(this.dx > 0) this.dx -= this.returnVelocity;
+			if(this.dx < 0) this.dx += this.returnVelocity;
+		}
+		if(Math.abs(this.dy) > Math.abs(this.initialAbsDy)){
+			if(this.dy > 0) this.dy -= this.returnVelocity;
+			if(this.dy < 0) this.dy += this.returnVelocity;
+		}
 	}
 }
 
@@ -161,8 +201,8 @@ function init() {
 		let radius = (Math.random() * 3 + 1);
 		let x = Math.random() * (window.innerWidth - 2 * radius) + radius;
 		let y = Math.random() * (window.innerHeight - 2 * radius) + radius;
-		let dx = Math.random() - 0.5 * 4;
-		let dy = Math.random() - 0.5 * 4;
+		let dx = (Math.random() - 0.5) * 4;
+		let dy = (Math.random() - 0.5) * 4;
 		circleArray.push(new Circle(x, y, dx, dy, radius))
 	}
 }
@@ -174,6 +214,7 @@ function animate() {
 	for(let i = 0; i < circleArray.length; i++) {
 		circleArray[i].update()
 	}
+	mouse.click = false
 }
 
 
