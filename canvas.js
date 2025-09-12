@@ -76,7 +76,8 @@ canvas.height = window.innerHeight;
 let mouse = {
 	x: undefined,
 	y: undefined,
-	click: false
+	click: false,
+	clickCount: 0,
 }
 let maxRadius = 40;
 
@@ -96,6 +97,14 @@ window.addEventListener('mousemove', function(event) {
 
 window.addEventListener('mousedown', function(event) {
 	mouse.click = true;
+	let explosionAudio = new Audio('audios/fast_explosion.mp3')
+	mouse.clickCount++;
+	if(mouse.clickCount%20 == 0) {
+		let gostrogonocoff = new Audio('audios/gostrogonocoff.mp3')
+		gostrogonocoff.play()
+	}
+	explosionAudio.play();
+
 	console.log(mouse);
 });
 
@@ -110,6 +119,7 @@ window.addEventListener('resize', function(event) {
 
 	init();
 })
+
 
 function Circle(x, y, dx, dy, radius) {
 	this.x = x;
