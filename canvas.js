@@ -79,6 +79,7 @@ let mouse = {
 	up: false,
 	down: false,
 	clickCount: 0,
+	over: false,
 }
 let maxRadius = 40;
 
@@ -114,16 +115,16 @@ audioPull2.volume = 0.03
 audioPull3.volume = 0.02
 audioPull4.volume = 0.02
 
-this.setTimeout(()=> {
-	audioPull.play()
-	audioPull3.play()
-},100)
-this.setTimeout(()=> {
-	audioPull2.play()
-},2500)
-this.setTimeout(()=> {
-	audioPull4.play()
-},300)
+// this.setTimeout(()=> {
+// 	audioPull.play()
+// 	audioPull3.play()
+// },100)
+// this.setTimeout(()=> {
+// 	audioPull2.play()
+// },2500)
+// this.setTimeout(()=> {
+// 	audioPull4.play()
+// },300)
 
 window.addEventListener('mouseup', function(event) {
 	mouse.up = true;
@@ -140,6 +141,8 @@ window.addEventListener('mouseup', function(event) {
 		audioPull2.playbackRate = 1
 		audioPull.volume = 0.03
 		audioPull2.volume = 0.03
+
+		audioPull3.playbackRate = 1
 	},200)
 
 	
@@ -147,8 +150,42 @@ window.addEventListener('mouseup', function(event) {
 	//console.log(mouse);
 });
 
+window.addEventListener('mouseover', function(event){
+	mouse.over = true;
+		
+	// necessario, pois navegadores só deixam audio tocar após interação do usuário
+
+	audioPull.loop = true;
+	audioPull2.loop = true;
+	audioPull3.loop = true;
+	audioPull4.loop = true;
+	audioPull.play()
+	audioPull3.play()
+	this.setTimeout(()=> {
+		if(mouse.over) audioPull2.play()
+	},2400)
+	this.setTimeout(()=> {
+		if(mouse.over) audioPull4.play()
+	},200)
+})
+
+window.addEventListener('mouseout', function(event){
+	mouse.over = false;
+	audioPull.loop = false;
+	audioPull2.loop = false;
+	audioPull3.loop = false;
+	audioPull4.loop = false;
+	audioPull.pause()
+	audioPull2.pause()
+	audioPull3.pause()
+	audioPull4.pause()
+})
+
+
 window.addEventListener('mousedown', function(event){
 	mouse.down = true;
+
+
 
 	//console.log(mouse);
 
