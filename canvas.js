@@ -97,8 +97,33 @@ window.addEventListener('mousemove', function(event) {
 });
 
 let audioPull = new Audio("audios/bubbles.mp3")
-let audioPull2 = new Audio("audios/bubbles2.mp3")
+let audioPull2 = new Audio("audios/bubbles.mp3")
 let audioPull3 = new Audio("audios/bubbles2.mp3")
+let audioPull4 = new Audio("audios/bubbles2.mp3")
+
+audioPull.load()
+audioPull2.load()
+audioPull3.load()
+audioPull4.load()
+audioPull.loop = true;
+audioPull2.loop = true;
+audioPull3.loop = true;
+audioPull4.loop = true;
+audioPull.volume = 0.03
+audioPull2.volume = 0.03
+audioPull3.volume = 0.02
+audioPull4.volume = 0.02
+
+this.setTimeout(()=> {
+	audioPull.play()
+	audioPull3.play()
+},100)
+this.setTimeout(()=> {
+	audioPull2.play()
+},2500)
+this.setTimeout(()=> {
+	audioPull4.play()
+},300)
 
 window.addEventListener('mouseup', function(event) {
 	mouse.up = true;
@@ -110,14 +135,13 @@ window.addEventListener('mouseup', function(event) {
 	}
 	explosionAudio.play();
 
-	audioPull.loop = false;
-	audioPull2.loop = false;
-	audioPull3.loop = false;
 	this.setTimeout(()=> {
-		audioPull.pause()
-		audioPull2.pause()
-		audioPull3.pause()
+		audioPull.playbackRate = 1
+		audioPull2.playbackRate = 1
+		audioPull.volume = 0.03
+		audioPull2.volume = 0.03
 	},200)
+
 	
 	mouse.down = false;
 	//console.log(mouse);
@@ -127,20 +151,14 @@ window.addEventListener('mousedown', function(event){
 	mouse.down = true;
 
 	//console.log(mouse);
-	audioPull.load()
-	audioPull2.load()
-	audioPull3.load()
-	audioPull.loop = true;
-	audioPull2.loop = true;
-	audioPull3.loop = true;
-	audioPull.volume = 0.05
-	audioPull2.volume = 0.05
-	audioPull3.volume = 0.05
-	this.setTimeout(()=> {
-		audioPull.play()
-		audioPull2.play()
-	},100)
-	this.setTimeout(()=> {audioPull3.play()},300)
+
+	audioPull.playbackRate = 1.25
+	audioPull2.playbackRate = 1.5
+	audioPull.volume = 0.2
+	audioPull2.volume = 0.1
+
+	audioPull3.playbackRate = 2
+
 })
 
 let circleQuantity = Math.floor(window.innerWidth * window.innerHeight / 800);
