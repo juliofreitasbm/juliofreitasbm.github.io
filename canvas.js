@@ -95,11 +95,10 @@ window.addEventListener('mousemove', function(event) {
 	mouse.y = event.y
 	// console.log(mouse);
 });
-window.addEventListener('touchmove', function(event) {
-	mouse.x = event.x
-	mouse.y = event.y
-	// console.log(mouse);
-});
+
+let audioPull = new Audio("audios/bubbles.mp3")
+let audioPull2 = new Audio("audios/bubbles2.mp3")
+let audioPull3 = new Audio("audios/bubbles2.mp3")
 
 window.addEventListener('mouseup', function(event) {
 	mouse.up = true;
@@ -111,20 +110,15 @@ window.addEventListener('mouseup', function(event) {
 	}
 	explosionAudio.play();
 
-	mouse.down = false;
-	//console.log(mouse);
-});
-
-window.addEventListener('touchend', function(event) {
-	mouse.up = true;
-	let explosionAudio = new Audio('audios/fast_explosion.mp3')
-	mouse.clickCount++;
-	if(mouse.clickCount%20 == 0) {
-		let gostrogonocoff = new Audio('audios/gostrogonocoff.mp3')
-		gostrogonocoff.play()
-	}
-	explosionAudio.play();
-
+	audioPull.loop = false;
+	audioPull2.loop = false;
+	audioPull3.loop = false;
+	this.setTimeout(()=> {
+		audioPull.pause()
+		audioPull2.pause()
+		audioPull3.pause()
+	},200)
+	
 	mouse.down = false;
 	//console.log(mouse);
 });
@@ -132,12 +126,21 @@ window.addEventListener('touchend', function(event) {
 window.addEventListener('mousedown', function(event){
 	mouse.down = true;
 
-	console.log(mouse);
-})
-window.addEventListener('touchstart', function(event){
-	mouse.down = true;
-
-	console.log(mouse);
+	//console.log(mouse);
+	audioPull.load()
+	audioPull2.load()
+	audioPull3.load()
+	audioPull.loop = true;
+	audioPull2.loop = true;
+	audioPull3.loop = true;
+	audioPull.volume = 0.05
+	audioPull2.volume = 0.05
+	audioPull3.volume = 0.05
+	this.setTimeout(()=> {
+		audioPull.play()
+		audioPull2.play()
+	},100)
+	this.setTimeout(()=> {audioPull3.play()},300)
 })
 
 let circleQuantity = Math.floor(window.innerWidth * window.innerHeight / 800);
