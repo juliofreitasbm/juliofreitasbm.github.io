@@ -95,6 +95,11 @@ window.addEventListener('mousemove', function(event) {
 	mouse.y = event.y
 	// console.log(mouse);
 });
+window.addEventListener('touchmove', function(event) {
+	mouse.x = event.x
+	mouse.y = event.y
+	// console.log(mouse);
+});
 
 window.addEventListener('mouseup', function(event) {
 	mouse.up = true;
@@ -110,7 +115,26 @@ window.addEventListener('mouseup', function(event) {
 	//console.log(mouse);
 });
 
+window.addEventListener('touchend', function(event) {
+	mouse.up = true;
+	let explosionAudio = new Audio('audios/fast_explosion.mp3')
+	mouse.clickCount++;
+	if(mouse.clickCount%20 == 0) {
+		let gostrogonocoff = new Audio('audios/gostrogonocoff.mp3')
+		gostrogonocoff.play()
+	}
+	explosionAudio.play();
+
+	mouse.down = false;
+	//console.log(mouse);
+});
+
 window.addEventListener('mousedown', function(event){
+	mouse.down = true;
+
+	console.log(mouse);
+})
+window.addEventListener('touchstart', function(event){
 	mouse.down = true;
 
 	console.log(mouse);
@@ -161,15 +185,14 @@ function Circle(x, y, dx, dy, radius) {
 		this.y += this.dy;
 
 		// interatividade
-		if(mouse.x - this.x < 50 
-			&& mouse.x - this.x > -50
-			&& mouse.y - this.y < 50 
-			&& mouse.y - this.y > -50
-		) {
+		let distance = Math.sqrt(Math.pow(this.x - mouse.x, 2) + Math.pow(this.y - mouse.y, 2));
+		if(distance < 60) {
 			if(mouse.up == true) this.explode();
-			if(mouse.down == true) this.pull()
 			if(this.radius < maxRadius) this.radius += 1;
 		} else {
+			if(distance < 120 && mouse.down == true) {
+				this.pull()
+			}
 			if(this.radius > this.minRadius) this.radius -= 1;
 			this.return()
 		}
@@ -178,18 +201,20 @@ function Circle(x, y, dx, dy, radius) {
 	}
 
 	this.explode = function() {
-		if(mouse.x - this.x < 0) {
-			this.dx = this.explosionAcceleration * Math.abs(dx);
-		}
-		else {
-			this.dx = -this.explosionAcceleration * Math.abs(dx);
-		}
-		if(mouse.y - this.y < 0) {
-			this.dy = this.explosionAcceleration * Math.abs(dy);
-		}
-		else {
-			this.dy = -this.explosionAcceleration * Math.abs(dy);
-		}
+		// if(mouse.x - this.x < 0) {
+		// 	this.dx = this.explosionAcceleration * Math.abs(dx);
+		// }
+		// else {
+		// 	this.dx = -this.explosionAcceleration * Math.abs(dx);
+		// }
+		// if(mouse.y - this.y < 0) {
+		// 	this.dy = this.explosionAcceleration * Math.abs(dy);
+		// }
+		// else {
+		// 	this.dy = -this.explosionAcceleration * Math.abs(dy);
+		// }
+		this.dx = (Math.random() - 0.5) * 4 * this.explosionAcceleration;
+		this.dy = (Math.random() - 0.5) * 4 * this.explosionAcceleration;
 
 		//console.log("blow");
 	}
@@ -217,8 +242,10 @@ function Circle(x, y, dx, dy, radius) {
 		// 	this.dx = -this.dx;
 		// 	this.dy = -this.dy;
 		// }
-		this.x = mouse.x;
-		this.y = mouse.y;
+		this.dx = -(this.x - mouse.x)/10;
+		this.dy = -(this.y - mouse.y)/10;
+		// this.x = mouse.x;
+		// this.y = mouse.y;
 	}
 }
 
