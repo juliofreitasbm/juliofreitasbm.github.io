@@ -13,6 +13,21 @@ setTimeout(() => {
 	imgWAD.style.display = 'none';
 },6000)
 
+// Background audio
+
+let backgroundAudio = new Audio("audios/merry-wanderers.mp3")
+backgroundAudio.loop = true;
+backgroundAudio.volume = 0.1;
+backgroundAudio.play()
+
+window.addEventListener('focus', function(event){
+	backgroundAudio.play()
+})
+
+window.addEventListener('blur', function(event){
+	backgroundAudio.pause()
+})
+
 const scaledCanvas = {
 	width: canvas.width/4,
 	height: canvas.height/4
