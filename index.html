@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body {
+		background-color: black;
+		position: relative;
+	}
+	img {
+		position: absolute;
+		left: 750px;
+		top: 10px;
+		width: 260px;
+		opacity: 1;
+		transition: opacity 500ms ease-in-out;
+	}
+	.fade-out {
+		opacity: 0;
+	}
+</style>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Learning Canvas</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-		html {
-			overflow: hidden;
-		}
-		canvas {
-			/* border: 1px solid black; */
-			background-color: white;
-		}
-	</style>
-
+	<title>Learning Vertical Platform</title>
 </head>
 <body>
-	<canvas></canvas>
-	<script src="canvas.js"></script>
+	<canvas>
+	</canvas>	
+
+	<img id="wad" src="img/wad.png" alt="WAD para mover">
+
+	<script src="./js/utils.js"></script>
+	<script src="./js/classes/CollisionBlock.js"></script>
+	<script src="./js/classes/Sprite.js"></script>
+	<script src="./js/classes/Player.js"></script>
+	<script src="./js/data/collisions.js"></script>
+	<script src="index.js"></script>
 </body>
 </html>
